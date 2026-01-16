@@ -1,5 +1,5 @@
 # Spotify-Churn
-# 🎧 Spotify User Engagement & Churn Analysis
+# Spotify User Engagement & Churn Analysis
 
 This project explores how user behavior differs between Free and Premium Spotify users, with a focus on engagement patterns and churn. The analysis follows a practical workflow using **Excel for data preparation** and **SQL for analysis**, similar to how product and analytics teams operate in real environments.
 
