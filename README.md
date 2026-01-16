@@ -249,13 +249,13 @@ spotify-churn-analysis/
 ```
 
 ---
-Project Summary
+#Project Summary
 
 I chose this project because understanding user engagement and churn is a critical challenge for any subscription-based service like Spotify. It allows an analyst to explore real-world patterns in user behavior and apply practical data skills such as data cleaning, segmentation, and SQL analysis. This project also demonstrates the ability to link behavioral metrics to actionable business insights, which is a key component of product-focused data analytics.
 
 The findings highlight several important insights: Premium users are more engaged and less likely to churn, low engagement is the strongest predictor of churn, and offline listening strongly correlates with retention. Additionally, ad exposure impacts Free users’ churn, and patterns vary by age and region. Collectively, these results convey the importance of monitoring user behavior and tailoring retention strategies to both subscription type and demographic segments.
 
-Proposed Solution
+#Proposed Solution
 
 To address customer churn, the platform can implement targeted retention strategies based on the findings. For Free users, reducing ad overload or personalizing ad experiences could decrease churn. Encouraging offline listening through feature promotion may improve retention across both Free and Premium users. Additionally, engagement-based interventions, such as recommending playlists or sending reminders to less active users, could help increase listening time and reduce churn risk. Tailoring campaigns by age and region ensures that retention efforts are optimized for the most at-risk segments.
 ## Author
