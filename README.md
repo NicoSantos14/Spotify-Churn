@@ -1,89 +1,75 @@
 # Spotify-Churn
 # 🎧 Spotify User Engagement & Churn Analysis
 
-> **End-to-end data analysis project** using **Excel for data cleaning**, **SQL for querying**, and **Power BI for visualization** to understand user engagement patterns and churn behavior across Spotify subscription types.
+This project explores how user behavior differs between Free and Premium Spotify users, with a focus on engagement patterns and churn. The analysis follows a practical workflow using **Excel for data preparation** and **SQL for analysis**, similar to how product and analytics teams operate in real environments.
 
 ---
 
-## 🔍 Project Overview
+## Project Overview
 
-**Goal:** Identify behavioral differences between Free and Premium users and determine which factors are most strongly associated with user churn.
+The goal of this analysis is to understand which user behaviors are most closely associated with churn and how those behaviors differ across subscription types. The findings can be used to inform retention strategies and highlight features that encourage long-term usage.
 
-**Key Questions Answered:**
+Key questions explored include:
 
-* How do engagement and skip behavior differ between Free and Premium users?
-* How does churn vary by subscription type?
-* What behavioral patterns distinguish churned vs non-churned users?
-* Does ad exposure impact churn for Free users?
-* Is offline listening associated with retention?
-* How does churn vary by age group and country?
-* Which high-engagement user segments show the strongest retention?
+* How does engagement differ between Free and Premium users?
+* Are churn rates meaningfully different by subscription type?
+* What behavioral signals appear before a user churns?
+* How do ads, offline listening, and demographics relate to retention?
 
 ---
 
-## 🧠 Business Context
+## Business Context
 
-Spotify’s growth depends on **retaining users and converting Free users to Premium**. Understanding how engagement, ads, offline listening, and demographics relate to churn helps:
-
-* Product teams prioritize features
-* Marketing teams target retention campaigns
-* Leadership evaluate subscription strategy
-
-This analysis simulates a **real product analytics use case**.
+User retention is a core driver of growth for streaming platforms. While Premium users generate direct revenue, Free users represent both churn risk and conversion opportunity. Understanding how listening behavior, ad exposure, and feature usage relate to churn helps product and marketing teams prioritize the most impactful improvements.
 
 ---
 
-## 📁 Dataset
+## Dataset
 
 **Table:** `spotify_data_project`
 
-**Key Columns:**
+The dataset contains user-level listening and behavior metrics.
 
-* `user_id` – unique user identifier
-* `subscription_type` – Free or Premium
-* `listening_time` – average daily listening minutes
-* `songs_played_per_day` – engagement intensity
-* `skip_rate` – percentage of skipped songs
-* `ads_listened_per_week` – ad exposure (Free users)
-* `offline_listening` – offline usage flag
-* `is_churned` – churn indicator (1 = churned)
+Key fields used in the analysis:
+
+* `user_id`
+* `subscription_type` (Free / Premium)
+* `listening_time`
+* `songs_played_per_day`
+* `skip_rate`
+* `ads_listened_per_week`
+* `offline_listening`
+* `is_churned`
 * `age`, `country`, `device_type`
 
-**Assumptions & Limitations:**
-
-* Churn is inferred from inactivity
-* Dataset represents a snapshot in time
-* Ads only apply to Free users
+Churn is inferred based on inactivity, and the data represents a snapshot rather than a full user lifecycle.
 
 ---
 
-## 🧹 Excel: Data Cleaning & Formatting
+## Data Preparation (Excel)
 
-Excel was used for **initial inspection and preparation** before loading into SQL.
+Excel was used to review and prepare the raw data before analysis. This step focused on making the dataset consistent and reliable rather than adding new logic.
 
-**Steps Performed:**
+Preparation steps included:
 
-* Removed duplicate user records
-* Standardized text fields (subscription type, device type)
-* Converted dates and numeric fields to consistent formats
-* Created helper columns (age bands, engagement checks)
+* Removing duplicate user records
+* Standardizing text fields such as subscription type and device
+* Ensuring numeric columns were correctly typed
+* Creating simple helper fields (e.g., age groups) for later analysis
 
-**Outcome:** Clean, analysis-ready dataset loaded into the SQL environment.
-
----
-
-## 🗄️ SQL: Analysis & Querying
-
-SQL is the **core analysis layer** for this project. Each section below maps a **business question → SQL logic → insight**. Only representative queries are shown to keep the README readable; full scripts live in the `/sql` folder.
+Once cleaned, the data was loaded into the SQL environment.
 
 ---
 
-### 1️⃣ Engagement by Subscription Type
+## SQL Analysis
 
-**Business Question:**
-Do Premium users show higher engagement and better listening behavior than Free users?
+All analysis was performed in SQL. Queries were written to directly answer specific business questions, with a focus on clarity and reproducibility. Representative queries are shown below; full scripts are available in the `/sql` directory.
 
-**SQL Used:**
+---
+
+### Engagement by Subscription Type
+
+This query compares overall engagement between Free and Premium users.
 
 ```sql
 SELECT
@@ -96,17 +82,13 @@ FROM spotify_data_project
 GROUP BY subscription_type;
 ```
 
-**Insight:**
-Premium users listen longer, play more songs per day, and skip fewer tracks than Free users, indicating substantially higher engagement.
+Premium users consistently show higher listening time, play more songs per day, and skip fewer tracks, indicating stronger engagement.
 
 ---
 
-### 2️⃣ Churn Rate by Subscription Type
+### Churn Rate by Subscription Type
 
-**Business Question:**
-Does churn differ between Free and Premium users?
-
-**SQL Used:**
+To understand whether engagement differences translate into retention, churn rates were calculated by subscription tier.
 
 ```sql
 SELECT
@@ -121,17 +103,13 @@ FROM spotify_data_project
 GROUP BY subscription_type;
 ```
 
-**Insight:**
-Free users churn at a significantly higher rate than Premium users, reinforcing the retention value of Premium features.
+Free users churn at a noticeably higher rate than Premium users, reinforcing the link between paid features and retention.
 
 ---
 
-### 3️⃣ Behavior of Churned vs Non-Churned Users
+### Churned vs Retained User Behavior
 
-**Business Question:**
-How does behavior differ between churned and retained users?
-
-**SQL Used:**
+This comparison looks at how behavior differs between users who churned and those who did not.
 
 ```sql
 SELECT
@@ -143,17 +121,13 @@ FROM spotify_data_project
 GROUP BY is_churned;
 ```
 
-**Insight:**
-Churned users listen far less, while skip rates remain similar. This suggests churn is driven more by disengagement than frustration.
+Churned users listen significantly less overall, while skip rates remain similar. This suggests disengagement, rather than frustration, is a primary churn signal.
 
 ---
 
-### 4️⃣ Ad Exposure Impact (Free Users)
+### Ad Exposure and Churn (Free Users)
 
-**Business Question:**
-Does higher ad exposure increase churn among Free users?
-
-**SQL Used:**
+Free users were grouped into ad exposure buckets to evaluate whether ad load impacts retention.
 
 ```sql
 WITH ad_buckets AS (
@@ -178,17 +152,13 @@ GROUP BY ad_exposure
 ORDER BY churn_rate_pct DESC;
 ```
 
-**Insight:**
-Higher ad exposure is associated with higher churn and lower listening time, indicating ad load may negatively impact retention.
+Higher ad exposure is associated with both lower listening time and higher churn among Free users.
 
 ---
 
-### 5️⃣ Offline Listening & Retention
+### Offline Listening and Retention
 
-**Business Question:**
-Is offline listening associated with lower churn?
-
-**SQL Used:**
+Offline listening usage was evaluated as a potential retention signal.
 
 ```sql
 SELECT
@@ -200,17 +170,13 @@ FROM spotify_data_project
 GROUP BY offline_listening;
 ```
 
-**Insight:**
-Users who use offline listening churn at significantly lower rates, making this one of the strongest retention signals in the dataset.
+Users who use offline listening churn at substantially lower rates, making this one of the strongest retention indicators in the dataset.
 
 ---
 
-### 6️⃣ Churn by Age Group & Country
+### Churn by Age Group and Country
 
-**Business Question:**
-How does churn vary across demographics and regions?
-
-**SQL Used:**
+Users were segmented by age group and country to surface demographic patterns.
 
 ```sql
 WITH age_buckets AS (
@@ -235,17 +201,13 @@ GROUP BY country, age_group
 ORDER BY churn_rate_pct DESC;
 ```
 
-**Insight:**
-Churn varies meaningfully by age group and country, highlighting the need for region- and demographic-specific retention strategies.
+Churn varies across regions and age groups, suggesting that retention strategies should not be one-size-fits-all.
 
 ---
 
-### 7️⃣ High-Engagement Retained Users
+### High-Engagement Retained Users
 
-**Business Question:**
-What does the ideal retained user look like?
-
-**SQL Used:**
+To define the most valuable retained users, the analysis filtered for high listening time, low skip rates, and no churn.
 
 ```sql
 SELECT
@@ -263,131 +225,32 @@ GROUP BY subscription_type, device_type
 ORDER BY users DESC;
 ```
 
-**Insight:**
-High-engagement retained users are predominantly Premium subscribers and cluster around specific device types, defining Spotify’s most valuable segment.
+These users are predominantly Premium subscribers and tend to cluster around specific device types.
 
 ---
 
-### 2️⃣ Churn Rate by Subscription Type
+## Key Takeaways
 
-**Insight:** Free users churn at a **significantly higher rate** than Premium users.
-
-This supports the hypothesis that Premium features contribute to retention.
-
----
-
-### 3️⃣ Behavior of Churned vs Non-Churned Users
-
-**Insight:**
-
-* Churned users listen substantially less
-* Skip rates remain similar
-* Ad exposure alone does not fully explain churn
-
-This suggests churn is driven more by **low engagement** than frustration behavior.
+* Premium users are more engaged and significantly less likely to churn
+* Low engagement is the clearest signal of future churn
+* High ad exposure increases churn risk among Free users
+* Offline listening is strongly associated with retention
+* Demographic and regional differences matter
 
 ---
 
-### 4️⃣ Ad Exposure Impact (Free Users Only)
-
-Users were bucketed into **Low, Medium, and High ad exposure** groups.
-
-**Insights:**
-
-* Higher ad exposure is associated with **higher churn rates**
-* Users with high ad exposure also show lower listening time
-
-Ad load appears to negatively impact retention for Free users.
-
----
-
-### 5️⃣ Offline Listening & Retention
-
-**Key Finding:**
-
-> Users who enable offline listening churn at **significantly lower rates**.
-
-Offline listening is one of the **strongest retention signals** observed.
-
----
-
-### 6️⃣ Churn by Age Group & Country
-
-Users were grouped into age buckets across countries.
-
-**Insights:**
-
-* Younger age groups tend to churn more
-* Churn patterns vary noticeably by region
-
-This highlights opportunities for **region- and age-specific retention strategies**.
-
----
-
-### 7️⃣ High-Engagement Retained Users
-
-Filtered for users who:
-
-* Listen ≥ 120 minutes/day
-* Skip < 20%
-* Are not churned
-
-**Insight:**
-
-* Premium users dominate this segment
-* Certain device types show consistently higher engagement
-
-This defines Spotify’s **ideal retained user profile**.
-
----
-
-## 🔑 Key Insights Summary
-
-* Premium users are significantly more engaged and churn less
-* Low engagement is the strongest churn indicator
-* High ad exposure increases churn risk for Free users
-* Offline listening is strongly correlated with retention
-* Younger users and certain regions show higher churn
-
----
-
-## 💡 Recommendations
-
-* Encourage Free users to adopt Premium features tied to retention (offline listening)
-* Reduce ad load or optimize ad experience for highly engaged Free users
-* Target retention campaigns at low-engagement users early
-* Customize strategies by age group and region
-
----
-
-## 📂 Repository Structure
+## Repository Structure
 
 ```
 spotify-churn-analysis/
-│
-├── data/              # Cleaned Excel files
-├── sql/               # SQL analysis scripts
-├── powerbi/           # Power BI dashboard (.pbix)
-├── visuals/           # Dashboard screenshots
+├── data/   # Cleaned Excel files
+├── sql/    # SQL analysis scripts
 ├── README.md
 ```
 
 ---
 
-## 🚀 How to Reproduce
+## Author
 
-1. Review cleaned Excel file in `/data`
-2. Load data into SQL database
-3. Run SQL scripts in `/sql`
-4. Open Power BI file and refresh data
-
----
-
-## 👤 Author
-
-**Nick Santos**
-Aspiring Data Analyst | SQL • Excel • Power BI
-
----
-
-⭐ *This project demonstrates practical, business-focused analytics using industry-standard tools.*
+Nicolas Nunez
+Data Analyst | SQL • Excel
