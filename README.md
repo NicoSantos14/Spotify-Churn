@@ -40,7 +40,9 @@ Key fields used in the analysis:
 * `ads_listened_per_week`
 * `offline_listening`
 * `is_churned`
-* `age`, `country`, `device_type`
+* `age`
+* `country`
+* `device_type`
 
 Churn is inferred based on inactivity, and the data represents a snapshot rather than a full user lifecycle.
 
