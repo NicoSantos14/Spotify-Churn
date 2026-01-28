@@ -265,18 +265,25 @@ To reduce customer churn, the platform should adopt targeted, data-driven retent
 Nicolas Nunez
 Data Analyst | SQL • Excel
 
-
-
 # Spotify User Churn & Engagement Analysis
 
-**Nicolas Nunez**  
-Data Analyst | SQL • Excel • User Behavior
+<div align="center">
+
+**Nick (Nicolas Nunez)**  
+Data Analyst | SQL • Excel • User Behavior  
+Palisades Park, NJ
+
+</div>
 
 ---
 
-### What this project is about
+<div align="center">
 
-I wanted to understand what truly makes people stay or leave Spotify — especially the big difference between Free and Premium users.
+## What this project is about
+
+</div>
+
+I wanted to understand what actually makes people stay or leave Spotify — especially the big difference between Free and Premium users.
 
 This project looks at real user-level listening behavior and tries to answer the most important questions for any subscription product:
 
@@ -287,7 +294,11 @@ This project looks at real user-level listening behavior and tries to answer the
 
 ---
 
-### The dataset
+<div align="center">
+
+## The dataset
+
+</div>
 
 **Table name:** `spotify_data_project`
 
@@ -305,11 +316,15 @@ Main columns I used:
 - `country`
 - `device_type`
 
-Note: Churn is based on inactivity (very common way to measure in this kind of snapshot data)
+**Note:** Churn is based on inactivity (very common way to measure in this kind of snapshot data)
 
 ---
 
-### What I did step by step
+<div align="center">
+
+## What I did step by step
+
+</div>
 
 1. **Excel – Quick cleaning & prep**  
    - Removed duplicate users  
@@ -319,38 +334,67 @@ Note: Churn is based on inactivity (very common way to measure in this kind of s
 
 2. **Then moved everything into SQL**  
    All the real analysis lives in SQL queries  
+   *(You can find the full scripts in the `/sql` folder)*
 
 ---
 
-### Most interesting things, I found
+<div align="center">
 
-#### 1. Premium users behave very differently
+## Most interesting things I found
+
+</div>
+
+<div align="center">
+
+### 1. Premium users behave very differently
+
+</div>
 - Listen **much** longer
 - Play way more songs every day
 - Skip a lot fewer tracks
 
 → Paying seems to make people actually use the product seriously
 
-#### 2. Churn is dramatically higher on Free
+<div align="center">
+
+### 2. Churn is dramatically higher on Free
+
+</div>
 Free users churn at a significantly higher rate  
 This is probably the clearest single signal in the whole dataset
 
-#### 3. Biggest churn warning sign = just… disappearing
-Churned users had much lower listening time overall  
-Skip rate didn’t change dramatically  
-→ It’s mostly “they stopped showing up” rather than “they got super annoyed”
+<div align="center">
 
-#### 4. Too many ads hurt Free users (a lot)
+### 3. Biggest churn warning sign = just… disappearing
+
+</div>
+Churned users had much lower listening time overall  
+Skip rate didn't change dramatically  
+→ It's mostly "they stopped showing up" rather than "they got super annoyed"
+
+<div align="center">
+
+### 4. Too many ads hurt Free users (a lot)
+
+</div>
 Higher ad buckets →  
 - Lower listening time  
 - Much higher churn probability  
-Classic ad fatigue pattern
+*Classic ad fatigue pattern*
 
-#### 5. Offline listening = very strong retention signal
+<div align="center">
+
+### 5. Offline listening = very strong retention signal
+
+</div>
 People who use offline mode churn **way** less  
 Probably the best positive indicator in the dataset
 
-#### 6. Age & country patterns exist
+<div align="center">
+
+### 6. Age & country patterns exist
+
+</div>
 Churn is noticeably different across  
 - Age groups (especially high with 18–24)  
 - Countries  
@@ -358,7 +402,11 @@ Churn is noticeably different across
 
 ---
 
-### Quick business ideas / next steps
+<div align="center">
+
+## Quick business ideas / next steps
+
+</div>
 
 - Test reducing ad load or improving ad targeting for Free users
 - Push offline listening harder (better onboarding, playlist suggestions, etc)
@@ -367,4 +415,64 @@ Churn is noticeably different across
 
 ---
 
-### Repository contents
+<div align="center">
+
+## Repository contents
+
+</div>
+spotify-churn-analysis/
+├── data/               → cleaned files + original (if allowed)
+├── sql/                → all analysis queries
+├── images/             → screenshots of results (optional)
+└── README.md
+
+Feel free to look through the SQL folder — every important finding has its own query.
+
+---
+
+<div align="center">
+
+## How to use this repository
+
+</div>
+
+1. `git clone https://github.com/[your-username]/spotify-churn-analysis.git`
+
+2. Open `data/` folder and check the cleaned dataset
+
+3. Run queries in `/sql/` folder (works in Mode, Snowflake, BigQuery, etc.)
+
+4. Check `/images` for key result screenshots
+
+<div align="center">
+
+[![SQL Analysis](https://github.com/NicoSantos14/Coffee_Sales_Insights-/blob/b6a64933d7e5710a464dc8a2c76c193f08bdacaa/Screenshot%202026-01-20%20203157.png?raw=true)](https://github.com/NicoSantos14/Coffee_Sales_Insights-/blob/b6a64933d7e5710a464dc8a2c76c193f08bdacaa/Screenshot%202026-01-20%20203157.png)
+
+[![Excel](https://img.shields.io/badge/Tool-Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white))  
+[![SQL](https://img.shields.io/badge/Tool-SQL-006699?style=for-the-badge&logo=postgresql&logoColor=white))  
+[![Data Cleaning](https://img.shields.io/badge/Data%20Cleaning-✓-green?style=for-the-badge))  
+[![User Segmentation](https://img.shields.io/badge/User%20Segmentation-✓-blue?style=for-the-badge))  
+[![Churn Analysis](https://img.shields.io/badge/Churn%20Analysis-✓-orange?style=for-the-badge))
+
+</div>
+
+---
+
+<div align="center">
+
+**Open to feedback!**  
+If you've worked with similar churn data (music, video, SaaS, etc) I'd love to hear what patterns you saw too.
+
+**Nick (Nicolas Nunez)**  
+Aspiring Data Analyst  
+SQL • Excel • User Behavior  
+Palisades Park, NJ  
+[your-linkedin] | [your.email@example.com]
+
+</div>
+
+
+
+
+
+
