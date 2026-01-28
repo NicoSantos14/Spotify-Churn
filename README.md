@@ -264,3 +264,107 @@ To reduce customer churn, the platform should adopt targeted, data-driven retent
 
 Nicolas Nunez
 Data Analyst | SQL • Excel
+
+
+
+# Spotify User Churn & Engagement Analysis
+
+**Nicolas Nunez**  
+Data Analyst | SQL • Excel • User Behavior
+
+---
+
+### What this project is about
+
+I wanted to understand what truly makes people stay or leave Spotify — especially the big difference between Free and Premium users.
+
+This project looks at real user-level listening behavior and tries to answer the most important questions for any subscription product:
+
+- How much more engaged are Premium users really?
+- What are the strongest early warning signs before someone churns?
+- Do ads push Free users away?
+- Which features keep people coming back?
+
+---
+
+### The dataset
+
+**Table name:** `spotify_data_project`
+
+Main columns I used:
+
+- `user_id`
+- `subscription_type` → Free / Premium
+- `listening_time` (total minutes)
+- `songs_played_per_day`
+- `skip_rate` (%)
+- `ads_listened_per_week`
+- `offline_listening` (yes/no)
+- `is_churned` (1 = churned, 0 = active)
+- `age`
+- `country`
+- `device_type`
+
+Note: Churn is based on inactivity (very common way to measure in this kind of snapshot data)
+
+---
+
+### What I did step by step
+
+1. **Excel – Quick cleaning & prep**  
+   - Removed duplicate users  
+   - Fixed messy text values (capitalization, spelling)  
+   - Checked that all numbers were actually stored as numbers  
+   - Created simple age buckets
+
+2. **Then moved everything into SQL**  
+   All the real analysis lives in SQL queries  
+
+---
+
+### Most interesting things, I found
+
+#### 1. Premium users behave very differently
+- Listen **much** longer
+- Play way more songs every day
+- Skip a lot fewer tracks
+
+→ Paying seems to make people actually use the product seriously
+
+#### 2. Churn is dramatically higher on Free
+Free users churn at a significantly higher rate  
+This is probably the clearest single signal in the whole dataset
+
+#### 3. Biggest churn warning sign = just… disappearing
+Churned users had much lower listening time overall  
+Skip rate didn’t change dramatically  
+→ It’s mostly “they stopped showing up” rather than “they got super annoyed”
+
+#### 4. Too many ads hurt Free users (a lot)
+Higher ad buckets →  
+- Lower listening time  
+- Much higher churn probability  
+Classic ad fatigue pattern
+
+#### 5. Offline listening = very strong retention signal
+People who use offline mode churn **way** less  
+Probably the best positive indicator in the dataset
+
+#### 6. Age & country patterns exist
+Churn is noticeably different across  
+- Age groups (especially high with 18–24)  
+- Countries  
+→ Blanket retention campaigns probably miss a lot
+
+---
+
+### Quick business ideas / next steps
+
+- Test reducing ad load or improving ad targeting for Free users
+- Push offline listening harder (better onboarding, playlist suggestions, etc)
+- Build automatic re-engagement flows when listening time starts dropping
+- Create age group + country specific retention experiments
+
+---
+
+### Repository contents
